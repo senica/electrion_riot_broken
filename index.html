@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <script>
+    const {remote} = require('electron')
+
+    let script = document.createElement('script')
+    script.src = `file://${remote.app.getAppPath()}/js/riot.js`
+    document.querySelector('head').appendChild(script);
+    script.onload = ()=>{
+      let script = document.createElement('script')
+      script.type = 'riot/tag'
+      script.src = `file://${remote.app.getAppPath()}/tags/test.tag`
+      document.querySelector('head').appendChild(script);
+      riot.compile(()=>{
+        riot.mount('*')
+      })
+    }
+
+    </script>
+
+  </head>
+  <body style="padding: 0px; background: none;" class="col">
+    <div style="padding: 10px;">
+      Body loaded, test tag is up next
+      <test></test>
+    </div>
+  </body>
+</html>
